@@ -3,7 +3,7 @@
     "jsx": "react",
     "module": "commonjs",
     "noImplicitAny": true,
-    "outDir": "./build/",
+    "outDir": "./static/build/",
     "preserveConstEnums": true,
     "removeComments": true,
     "target": "ES5"
