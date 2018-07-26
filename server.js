@@ -4,15 +4,18 @@ const bodyParser     = require('body-parser');
 const app            = express();
 let   db             = require('./config/db');
 const path           = require('path');
+const mongoose       = require("mongoose");
 
 const port = 8000;
 
+mongoose.connect(db.testuri,{useNewUrlParser:true});
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
-MongoClient.connect(db.url, {useNewUrlParser:true}, (err, database) => {
+MongoClient.connect(db.testuri, {useNewUrlParser:true}, (err, database) => {
   if (err) return console.log(err)
   
-  db = database.db("akshar_patel_database")
+  db = database.db("testdatabase")
   require('./server/routes')(app, db);
 
   app.listen(port, () => {
