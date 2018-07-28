@@ -5,12 +5,11 @@ const User = require("../models/user");
 
 
 
-module.exports = function(app, db) {
-    app.get('/signin', (req, res, err) => {
-      
-    });
+module.exports = function(app) {
+    
+    app.get('/signin',userController.signin);
+    app.post('/signup',userController.signup);
 
-    app.post('/signup', userController.signup);
-  
+    
   
   }

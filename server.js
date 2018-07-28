@@ -1,25 +1,31 @@
 const express        = require('express');
 const MongoClient    = require('mongodb').MongoClient;
-const bodyParser     = require('body-parser');
-const app            = express();
-let   db             = require('./config/db');
-const path           = require('path');
 const mongoose       = require("mongoose");
+const app            = express();
+
+const morgan         = require("morgan");
+const bodyParser     = require('body-parser');
+
+const db             = require('./config/db');
+const config         = require("./config/config");
+const path           = require('path');
 
 const port = 8000;
 
-mongoose.connect(db.testuri,{useNewUrlParser:true});
+const database = mongoose.connect(db.testuri,{useNewUrlParser:true})
+  .then(
+    ()=>{
+      app.use(bodyParser.urlencoded({ extended: true }));
+      app.use(morgan("dev"));
+      require("./server/routes")(app);
+      
+      app.listen(port);
+      console.log('Magic happens at http://localhost:' + port);
+      
+    },
+    err =>{
+      log.error("Failed to Connect")
+    }
+  )
 
-app.use(bodyParser.urlencoded({ extended: true }));
-
-MongoClient.connect(db.testuri, {useNewUrlParser:true}, (err, database) => {
-  if (err) return console.log(err)
-  
-  db = database.db("testdatabase")
-  require('./server/routes')(app, db);
-
-  app.listen(port, () => {
-    console.log('We are live on ' + port);
-  });               
-})
 
