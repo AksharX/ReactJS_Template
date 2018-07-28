@@ -1,5 +1,5 @@
-const authenticationRoute = require('./authenticationRoute');
+const usersRoute = require('./users');
 module.exports = function(app, db) {
-  authenticationRoute(app, db);
+  usersRoute(app, db);
   // Other route groups could go here, in the future
 };
