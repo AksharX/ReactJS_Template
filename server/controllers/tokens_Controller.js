@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const verifyJWTToken = (token) => 
 {
     return new Promise((resolve, reject)=>{
-        jwt.verify(token,process.env.Secret,(err,decodedToken) =>
+        jwt.verify(token,process.env.JWT_SECRET,(err,decodedToken) =>
         {
             if (err||!decodedToken)
             {
@@ -22,23 +22,20 @@ const createJWTToken = (details)=>
     {
       details = {}
     }
-  
-    if (!details.maxAge || typeof details.maxAge !== 'number')
+    
+    if (!details.maxAge)
     {
-      details.maxAge = 3600
+      details.maxAge = "3 days"
     }
-  
+    
+    
     let token = jwt.sign({
        data: details.sessionData
       }, process.env.JWT_SECRET, {
         expiresIn: details.maxAge,
         algorithm: 'HS256'
     })
-  
     return token
 }
 
-export default {
-    verifyJWTToken,
-    createJWTToken,
-}
+module.exports = {verifyJWTToken,createJWTToken};

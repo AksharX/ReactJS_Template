@@ -22,6 +22,13 @@ const UserSchema = new mongoose.Schema({
     }
   });
 
+  UserSchema.methods.comparePassword = function(password){
+    console.log(this.get("password"));
+    let hash = this.get("password",String)
+    return bcrypt.compareSync(password,hash)
+    
+  }
+
   UserSchema.pre('save', function(next){
     const salt = bcrypt.genSaltSync(12);
     const hash = bcrypt.hashSync(this.password, salt);

@@ -1,0 +1,19 @@
+API DOCUMENTATION
+
+GATHERINGS
+    name
+    adminMembers: [User],
+    members: [User],
+    location 
+    date: Date
+
+USER
+    email
+    username
+    password
+
+USER_DETAIL
+    User
+    gatheringsAdmin = [User]
+    gatheringsInvited = [User]
+

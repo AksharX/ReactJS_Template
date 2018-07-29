@@ -1,24 +1,22 @@
-const mongoose = require('mongoose');
-const log = require("loglevel");
+const mongoose   = require('mongoose');
+const Schema     = mongoose.Schema;
+const log        = require("loglevel");
+const Gatherings = require("./gatherings");
+const User       = require("./user"); 
 
 
 const UserDetailSchema = new mongoose.Schema({
-    email: {
-      type: String,
-      unique: true,
-      required: true,
-      trim: true
-    },
-    username: {
-      type: String,
-      unique: true,
-      required: true,
-      trim: true
-    },
-    password: {
-      type: String,
-      required: true,
-    }
+  User:{
+    type: Schema.Types.ObjectId,
+    ref: "Gathering",
+    unique: true,
+    required: true,
+  },
+  
+  gatheringsAdmin: [{ type: Schema.Types.ObjectId, ref:"Gathering" }],
+  
+  gatheringsInvited: [{ type: Schema.Types.ObjectId, ref:"Gathering" }],
+  
 });
 
 module.exports = mongoose.model('UserDetail', UserDetailSchema);
