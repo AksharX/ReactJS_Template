@@ -14,6 +14,6 @@ USER
 
 USER_DETAIL
     User
-    gatheringsAdmin = [User]
-    gatheringsInvited = [User]
+    gatheringsAdmin = [GATHERING]
+    gatheringsInvited = [GATHERING]
 

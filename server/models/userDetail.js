@@ -8,7 +8,7 @@ const User       = require("./user");
 const UserDetailSchema = new mongoose.Schema({
   User:{
     type: Schema.Types.ObjectId,
-    ref: "Gathering",
+    ref: "User",
     unique: true,
     required: true,
   },

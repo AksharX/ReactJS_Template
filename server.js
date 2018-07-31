@@ -9,7 +9,9 @@ const bodyParser     = require('body-parser');
 const db             = require('./config/db');
 const config         = require("./config/config");
 const path           = require('path');
+const log            = require('loglevel');
 
+log.enableAll();
 const port = 8000;
 
 const database = mongoose.connect(db.testuri,{useNewUrlParser:true})

@@ -32,7 +32,7 @@ const UserSchema = new mongoose.Schema({
   UserSchema.pre('save', function(next){
     const salt = bcrypt.genSaltSync(12);
     const hash = bcrypt.hashSync(this.password, salt);
-    this.password = hash
+    this.password = hash;
     next();
   })
 

@@ -20,12 +20,12 @@ const createJWTToken = (details)=>
 {
     if (typeof details !== 'object')
     {
-      details = {}
+      details = {};
     }
     
     if (!details.maxAge)
     {
-      details.maxAge = "3 days"
+      details.maxAge = "3 days";
     }
     
     
@@ -35,7 +35,7 @@ const createJWTToken = (details)=>
         expiresIn: details.maxAge,
         algorithm: 'HS256'
     })
-    return token
+    return token;
 }
 
 module.exports = {verifyJWTToken,createJWTToken};
