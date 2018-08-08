@@ -11,7 +11,7 @@ const getUserInfo = (req,res)=> {
         "username" : getUsername,
         "email" : getEmail,
     };
-    log.debug((req.query.q));
+    
     performQueryLookup(req,res,UserInfo);
 
 };
@@ -67,11 +67,25 @@ const getGathering = (req,res,attribute)=>{
 };
 
 const getUsername = (req,res) => {
-    log.debug("getting Username");
+    const userID = req.user.userID;
+    
+    User.findById(userID,(err,result)=>{
+        res.status(200).json({
+            success: "User Name: " + result.username,
+            username: result.username
+        });
+    });
 };
 
 const getEmail = (req,res) => {
-    log.debug("getting EMAIL");
+    const userID = req.user.userID;
+    
+    User.findById(userID,(err,result)=>{
+        res.status(200).json({
+            success: "Email: " + result.email,
+            username: result.email
+        });
+    });
 };
 
 const createGathering = (req,res)=>{
@@ -90,7 +104,7 @@ const createGathering = (req,res)=>{
     .then((result)=>{
         
         UserDetail.findOneAndUpdate({User:userID},{$push:{gatheringsAdmin:gathering.id}},(err,userdata)=>{
-            log.debug("Insertedd User as Admin for Gathering");
+            log.debug("Inserted User as Admin for Gathering");
             res.status(201).json({
                 success: "Created Gathering",
                 gathering: gathering.toJSON(),
